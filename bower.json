@@ -6,7 +6,8 @@
   "dependencies": {
     "jquery": "1.11.1",
     "bootstrap": "~3.3.1",
-    "bootstrap-walking-extras": "https://github.com/m4TT3rs/bootstrap-walking-extras.git"
+    "bootstrap-walking-extras": "https://github.com/m4TT3rs/bootstrap-walking-extras.git",
+    "modernizr": "~2.8.3"
   },
   "exportsOverride": {
     "bootstrap": {
@@ -20,6 +21,9 @@
     },
     "jquery": {
       "js": "dist/*"
+    },
+    "modernizr": {
+      "js": "modernizr.js"
     }
   }
 }

@@ -10,7 +10,7 @@ module.exports = function(grunt) {
             ' */\n',
 
     clean: {
-      dist: ['dist/css','dist/js','dist/img']
+      dist: ['dist/css','dist/js','dist/img','dist/fonts']
     },
 
     bower: {
@@ -25,6 +25,17 @@ module.exports = function(grunt) {
           bowerOptions: {}
         }
       }
+    },
+
+    copy:{
+        bootstrapFonts:{
+          expand:true,
+          flatten:true,
+          cwd: './dist/lib/bootstrap/fonts/',
+          src: '**',
+          dest: './dist/fonts/',
+          filter: 'isFile'
+        }
     },
 
     jshint: {
@@ -114,12 +125,38 @@ module.exports = function(grunt) {
 
     watch: {
       less: {
+        options: {
+          livereload: true
+        },
         files: 'src/less/*.less',
         tasks: 'dist-css'
       },
       js: {
+        options: {
+          livereload: true
+        },
         files: 'src/js/*.js',
         tasks: 'dist-js'
+      },
+      html:{
+        options: {
+          livereload: true
+        },
+        files: 'templates/*'
+      }
+    },
+
+
+
+    connect: {
+      server: {
+        options: {
+          port: 9001,
+          hostname: 'localhost',
+          livereload:true,
+          open: 'http://localhost:9001/templates/',
+          base: ''
+        }
       }
     }
 
@@ -130,7 +167,9 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-newer');
 
-  grunt.registerTask('install', ['clean','bower:install','dist']);
+  grunt.registerTask('install', ['clean','bower:install','copy:bootstrapFonts','dist']);
+
+  grunt.registerTask('serve', ['connect','watch']);
 
   // JS distribution task.
   grunt.registerTask('dist-js', ['jshint','concat_sourcemap','uglify']);
