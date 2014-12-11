@@ -10,7 +10,21 @@ module.exports = function(grunt) {
             ' */\n',
 
     clean: {
-      dist: ['dist']
+      dist: ['dist/css','dist/js','dist/img']
+    },
+
+    bower: {
+      install: {
+        options: {
+          targetDir: './dist/lib',
+          layout: 'byComponent',
+          install: true,
+          verbose: false,
+          cleanTargetDir: true,
+          cleanBowerDir: false,
+          bowerOptions: {}
+        }
+      }
     },
 
     jshint: {
@@ -115,6 +129,8 @@ module.exports = function(grunt) {
   require('load-grunt-tasks')(grunt, {scope: 'devDependencies'});
 
   grunt.loadNpmTasks('grunt-newer');
+
+  grunt.registerTask('install', ['clean','bower:install','dist']);
 
   // JS distribution task.
   grunt.registerTask('dist-js', ['jshint','concat_sourcemap','uglify']);

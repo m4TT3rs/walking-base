@@ -1,0 +1,25 @@
+{
+  "name": "rename-me-project",
+  "version": "1.0.0",
+  "description": "a basic test project to test bower functionallity",
+  "author": "Mattias (Walking Men)",
+  "dependencies": {
+    "jquery": "1.11.1",
+    "bootstrap": "~3.3.1",
+    "bootstrap-walking-extras": "https://github.com/m4TT3rs/bootstrap-walking-extras.git"
+  },
+  "exportsOverride": {
+    "bootstrap": {
+      "js": "dist/js/bootstrap*",
+      "css": "dist/css/*",
+      "fonts": "dist/fonts/*"
+    },
+    "bootstrap-walking-extras": {
+      "js": "dist/js/*",
+      "css": "dist/css/*"
+    },
+    "jquery": {
+      "js": "dist/*"
+    }
+  }
+}
