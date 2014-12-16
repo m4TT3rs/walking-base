@@ -53,10 +53,3 @@
 ## Stuff still to be implemented
 ### general
 - setup bake for static templates (http://www.rorsvort.com/blog/2014/04/11/simple-static-html-partials-includes-with-yeoman-and-gruntjs.html)
-- icons (tbd to use icon font or svg background img)
-  - http://blog.toggl.com/2014/04/svg-icon-build-system-using-grunt-grunticon/
-
-### security
-- .htaccess/web.config for src folder (to deny access it if it is uploaded to live)
-- .htaccess/web.config for files folder (to prevent script execution)
-- .htaccess/web.config for gruntfile & other config files (to prevent script execution)
