@@ -40,7 +40,7 @@
 |  /src/**less**                | :white_check_mark:  |  *compiled and concatinated to dist/js* |
 |  /src/**js**                  | :white_check_mark:  |  *compiled and concatinated to dist/js* |
 |  /src/**img**                 | :white_check_mark:  |  *images, will be minimized to the dist/img folder* |
-|  /src/**icons**               | :white_check_mark:  |  *icons will be auto compiled to a font file (.svg files)* |
+|  /src/fonts/**icons**         | :white_check_mark:  |  *icons will be auto compiled to a font file (.svg files)* |
 |  /**templates**               | :white_check_mark:  |  *PHP/HTML/... template files are copied here* |
 |  /files/**documents**         | :white_check_mark:  |  *pdf,word,xls etc* |
 |  /files/**downloads**         | :white_check_mark:  |  *zip,exe, etc* |

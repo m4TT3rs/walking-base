@@ -10,8 +10,7 @@ module.exports = function(grunt) {
             ' */\n',
 
     clean: {
-      dist: ['dist/css','dist/js','dist/img','dist/icons','dist/fonts'],
-      iconsAfter:['temp-svg']
+      dist: ['dist/css','dist/js','dist/img','dist/fonts']
     },
 
     bower: {
@@ -124,47 +123,15 @@ module.exports = function(grunt) {
       }
     },
 
-    svgmin: { //minimize SVG files
+    webfont: {
+      icons: {
+        src: 'src/fonts/icons/*.svg',
+        dest: 'dist/fonts/',
         options: {
-            plugins: [
-                { removeXMLProcInst:false },
-                { removeViewBox: false },
-                { removeUselessStrokeAndFill: false }
-            ]
-        },
-        dist: {
-            expand: true,
-            cwd: 'src/icons',
-            src: ['*.svg'],
-            dest: 'temp-svg/compressed'
+          types:'eot,woff,ttf,svg',
+          engine: 'node'
         }
-    },
-
-    grunticon: { //makes SVG icons into a CSS file
-        myIcons: {
-            files: [{
-                expand: true,
-                cwd: 'temp-svg/compressed',
-                src: ['*.svg'],
-                dest: 'dist/icons/'
-            }],
-            options: {
-                cssprefix: '.icon-',
-                pngfolder: "png/",
-                cssbasepath: "/dist/icons/",
-                colors: {
-                    primary:  '#428bca',
-                    success:  '#5cb85c',
-                    info:     '#5bc0de',
-                    warning:  '#f0ad4e',
-                    danger:   '#d9534f',
-                    black:    '#000000',
-                    white:    '#ffffff',
-                    gray:     '#555555'
-
-                }
-            }
-        }
+      }
     },
 
     watch: {
@@ -224,7 +191,7 @@ module.exports = function(grunt) {
 
   // Image compression task.
   grunt.registerTask('dist-img', ['newer:imagemin']);
-  grunt.registerTask('dist-svg', ['svgmin','grunticon','clean:iconsAfter']);
+  grunt.registerTask('dist-svg', ['webfont']);
 
   // Full distribution task.
   grunt.registerTask('dist', ['dist-css', 'dist-js','dist-img']);
