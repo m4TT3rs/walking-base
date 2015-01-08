@@ -1,6 +1,7 @@
 {
   "name": "rename-me-project",
   "version": "1.0.0",
+  "baseThemePath": "",
   "description": "a basic test project to test bower functionallity",
   "author": "Mattias (Walking Men)",
   "devDependencies": {
