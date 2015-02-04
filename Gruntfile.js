@@ -169,6 +169,13 @@ module.exports = function(grunt) {
         },
         files: '<%= pkg.baseThemePath %>src/fonts/*',
         tasks: 'dist-font'
+      },
+      img:{
+        options: {
+          livereload: true
+        },
+        files: '<%= pkg.baseThemePath %>src/img/**/*',
+        tasks: 'dist-img'
       }
     },
 
