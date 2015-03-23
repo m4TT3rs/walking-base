@@ -10,13 +10,13 @@ module.exports = function(grunt) {
             ' */\n',
 
     clean: {
-      dist: ['<%= pkg.baseThemePath %>dist/css','<%= pkg.baseThemePath %>dist/js','<%= pkg.baseThemePath %>dist/img','<%= pkg.baseThemePath %>dist/fonts']
+      dist: ['<%= pkg.baseDistPath %>dist/css','<%= pkg.baseDistPath %>dist/js','<%= pkg.baseDistPath %>dist/img','<%= pkg.baseDistPath %>dist/fonts']
     },
 
     bower: {
       install: {
         options: {
-          targetDir: '<%= pkg.baseThemePath %>dist/lib',
+          targetDir: '<%= pkg.baseDistPath %>dist/lib',
           layout: 'byComponent',
           install: true,
           verbose: false,
@@ -31,27 +31,27 @@ module.exports = function(grunt) {
         bootstrapFonts:{
           expand:true,
           flatten:true,
-          cwd: '<%= pkg.baseThemePath %>dist/lib/bootstrap/fonts/',
+          cwd: '<%= pkg.baseDistPath %>dist/lib/bootstrap/fonts/',
           src: '**',
-          dest: '<%= pkg.baseThemePath %>dist/fonts/',
+          dest: '<%= pkg.baseDistPath %>dist/fonts/',
           filter: 'isFile'
         },
         otherFonts:{
           expand:true,
           flatten:true,
-          cwd: '<%= pkg.baseThemePath %>src/fonts/',
+          cwd: '<%= pkg.baseSrcPath %>src/fonts/',
           src: ['*'],
-          dest: '<%= pkg.baseThemePath %>dist/fonts/',
+          dest: '<%= pkg.baseDistPath %>dist/fonts/',
           filter: 'isFile'
         }
     },
 
     jshint: {
       options: {
-        jshintrc: '<%= pkg.baseThemePath %>src/js/.jshintrc'
+        jshintrc: '<%= pkg.baseSrcPath %>src/js/.jshintrc'
       },
       src: {
-        src: '<%= pkg.baseThemePath %>src/js/*.js'
+        src: '<%= pkg.baseSrcPath %>src/js/*.js'
       }
     },
 
@@ -60,8 +60,8 @@ module.exports = function(grunt) {
         sourcesContent: true
       },
       mypackage: {
-        src: ['<%= pkg.baseThemePath %>src/js/*.js'],
-        dest: '<%= pkg.baseThemePath %>dist/js/<%= pkg.name %>.js'
+        src: ['<%= pkg.baseSrcPath %>src/js/*.js'],
+        dest: '<%= pkg.baseDistPath %>dist/js/scripts.js'
       }
     },
 
@@ -77,7 +77,7 @@ module.exports = function(grunt) {
           }
         },
         src: '<%= concat_sourcemap.mypackage.dest %>',
-        dest: '<%= pkg.baseThemePath %>dist/js/<%= pkg.name %>.min.js'
+        dest: '<%= pkg.baseDistPath %>dist/js/scripts.min.js'
       }
     },
 
@@ -87,11 +87,11 @@ module.exports = function(grunt) {
         options: {
           sourceMap: true,
           outputSourceFiles: true,
-          sourceMapURL: '<%= pkg.name %>.css.map',
-          sourceMapFilename: '<%= pkg.baseThemePath %>dist/css/<%= pkg.name %>.css.map'
+          sourceMapURL: 'theme.css.map',
+          sourceMapFilename: '<%= pkg.baseDistPath %>dist/css/theme.css.map'
         },
         files: {
-          '<%= pkg.baseThemePath %>dist/css/<%= pkg.name %>.css': '<%= pkg.baseThemePath %>src/less/<%= pkg.name %>.less'
+          '<%= pkg.baseDistPath %>dist/css/theme.css': '<%= pkg.baseSrcPath %>src/less/theme.less'
         }
       },
       minify: {
@@ -100,7 +100,7 @@ module.exports = function(grunt) {
           report: 'min'
         },
         files: {
-          '<%= pkg.baseThemePath %>dist/css/<%= pkg.name %>.min.css': '<%= pkg.baseThemePath %>dist/css/<%= pkg.name %>.css'
+          '<%= pkg.baseDistPath %>dist/css/theme.min.css': '<%= pkg.baseDistPath %>dist/css/theme.css'
         }
       }
     },
@@ -113,8 +113,8 @@ module.exports = function(grunt) {
         },
         files: {
           src: [
-            '<%= pkg.baseThemePath %>dist/css/<%= pkg.name %>.css',
-            '<%= pkg.baseThemePath %>dist/css/<%= pkg.name %>.min.css'
+            '<%= pkg.baseDistPath %>dist/css/theme.css',
+            '<%= pkg.baseDistPath %>dist/css/theme.min.css'
           ]
         }
       }
@@ -124,17 +124,17 @@ module.exports = function(grunt) {
       dynamic: {                         // Another target
         files: [{
           expand: true,                  // Enable dynamic expansion
-          cwd: '<%= pkg.baseThemePath %>src/img/',               // Src matches are relative to this path
+          cwd: '<%= pkg.baseSrcPath %>src/img/',               // Src matches are relative to this path
           src: ['**/*.{png,jpg,gif}'],   // Actual patterns to match
-          dest: '<%= pkg.baseThemePath %>dist/img/'              // Destination path prefix
+          dest: '<%= pkg.baseDistPath %>dist/img/'              // Destination path prefix
         }]
       }
     },
 
     webfont: {
       icons: {
-        src: '<%= pkg.baseThemePath %>src/fonts/icons/*.svg',
-        dest: '<%= pkg.baseThemePath %>dist/fonts/',
+        src: '<%= pkg.baseSrcPath %>src/fonts/icons/*.svg',
+        dest: '<%= pkg.baseDistPath %>dist/fonts/',
         options: {
           types:'eot,woff,ttf,svg',
           engine: 'node'
@@ -147,34 +147,34 @@ module.exports = function(grunt) {
         options: {
           livereload: true
         },
-        files: '<%= pkg.baseThemePath %>src/less/**/*.less',
+        files: '<%= pkg.baseSrcPath %>src/less/**/*.less',
         tasks: 'dist-css'
       },
       js: {
         options: {
           livereload: true
         },
-        files: '<%= pkg.baseThemePath %>src/js/*.js',
+        files: '<%= pkg.baseSrcPath %>src/js/*.js',
         tasks: 'dist-js'
       },
       html:{
         options: {
           livereload: true
         },
-        files: '<%= pkg.baseThemePath %>templates/*'
+        files: '<%= pkg.baseDistPath %>/*'
       },
       fonts:{
         options: {
           livereload: true
         },
-        files: '<%= pkg.baseThemePath %>src/fonts/*',
+        files: '<%= pkg.baseSrcPath %>src/fonts/*',
         tasks: 'dist-font'
       },
       img:{
         options: {
           livereload: true
         },
-        files: '<%= pkg.baseThemePath %>src/img/**/*',
+        files: '<%= pkg.baseSrcPath %>src/img/**/*',
         tasks: 'dist-img'
       }
     },
@@ -187,8 +187,8 @@ module.exports = function(grunt) {
           port: 9001,
           hostname: 'localhost',
           livereload:true,
-          open: 'http://localhost:9001/templates/',
-          base: ''
+          open: 'http://localhost:9001/',
+          base: '<%= pkg.baseDistPath %>'
         }
       }
     }
