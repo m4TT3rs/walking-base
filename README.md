@@ -15,7 +15,7 @@
 1. open terminal (on mac) or cmd (on windows)
 2. cd into your project folder
 3. type `npm install`
-  - **Windows**: an issue exits atm so you need to copy the contents of the node_modules_tempfix/ folder into node_modules/.
+  - **Windows**: You must run this as administrator /!\
 4. type `grunt install`
 
 ### For existing projects
